@@ -1,0 +1,7 @@
+POST http://localhost:8000/token/
+Content-Type: application/json
+
+{
+  "username": "fathirshu",
+  "password": "Fathima@123"
+}

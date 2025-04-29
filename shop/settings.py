@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'store',
     'shop_store',
     'rest_framework',
+    # 'rest_framework.authtoken'
     'corsheaders',
 
 ]
@@ -73,10 +74,10 @@ CORS_ALLOWED_ORIGINS = [
 "http://localhost:5173",
 "http://localhost:5174",
 "http://localhost:5175",
+"https://shopapp-u0f6.onrender.com"
 ]
 
 ROOT_URLCONF = 'shop.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

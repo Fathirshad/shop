@@ -7,5 +7,5 @@ class CustomUser(AbstractUser):  # Fixed class name
     address = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.username

@@ -49,7 +49,10 @@ INSTALLED_APPS = [
     'store',
     'shop_store',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     # 'rest_framework.authtoken'
+    # 'restframework_simplejwtcorsheaders'
     'corsheaders',
 
 ]
@@ -67,7 +70,7 @@ MIDDLEWARE = [
 
 ]
 
-# CORS_ALLOW_ALL_ORIGINS = True  # Allows all origins (for development)
+CORS_ALLOW_ALL_ORIGINS = True  # Allows all origins (for development)
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -76,6 +79,14 @@ CORS_ALLOWED_ORIGINS = [
 "http://localhost:5175",
 "https://shopapp-u0f6.onrender.com"
 ]
+
+
+
+AUTH_USER_MODEL = 'store.CustomUser'
+
+
+
+
 
 ROOT_URLCONF = 'shop.urls'
 TEMPLATES = [

@@ -1,7 +1,13 @@
 from django.urls import path
 from . import views
+from django.urls import path
+from .views import RegisterView
+
+
+
 
 urlpatterns = [
+    path('api/register/', RegisterView.as_view(), name='register'),
     path("products",views.products,name="products"),
     path("product_detail/<slug:slug>",views.product_detail,name="product_detail"),
     path("add_item/",views.add_item,name="add_item"),
@@ -15,7 +21,10 @@ urlpatterns = [
     path("initiate_payment/",views.initiate_payment,name="initiate_payment"),
     path("payment_callback/",views.payment_callback,name="payment_callback"),
     path("initiate_paypal_payment/",views.initiate_paypal_payment,name="initiate_paypal_payment"),
-    path("paypal_payment_callback/",views.paypal_payment_callback,name="paypal_payment_callback")
+    path("paypal_payment_callback/",views.paypal_payment_callback,name="paypal_payment_callback"),
+
 
 ]
+
+
 # fetching all_products:http://127.0.01:8000/products

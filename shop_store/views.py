@@ -12,11 +12,28 @@ import requests
 from django.views.decorators.csrf import csrf_exempt
 import paypalrestsdk
 from django.conf import settings
-# from django.shortcuts import get_object_or_404
-
 
 
 BASE_URL = settings.REACT_BASE_URL
+
+
+
+from rest_framework import generics
+from .serializers import RegisterSerializer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+
+
+
+
+
+
+
 
 paypalrestsdk.configure({
     "mode": settings.PAYPAL_MODE,
@@ -90,22 +107,7 @@ def get_cart(request):
 
 
 
-# def get_cart(request):
-#     cart_code = request.GET.get('cart_code')
-#     if not cart_code:
-#         return Response({'error': 'cart_code is required'}, status=status.HTTP_400_BAD_REQUEST)
-    
-#     cart = get_object_or_404(Cart, cart_code=cart_code)
-    # Serialize and return the cart
 
-    
-# def get_cart(request):
-#     cart_code = request.query_params.get("cart_code")
-    
-
-#     cart = Cart.objects.get(cart_code=cart_code,paid=False)
-#     serializer = CartSerializer(cart)
-#     return Response(serializer.data)
 
 
 
@@ -136,6 +138,7 @@ def delete_cartitem(request):
 @permission_classes([IsAuthenticated])
 def get_username(request):
     user = request.user
+
     return Response({"username":user.username})
  
 
@@ -382,3 +385,15 @@ def paypal_payment_callback(request):
     
     else:
         return Response({"error":"Invalied payment details."},status=400)
+
+
+
+
+
+
+
+
+
+
+
+

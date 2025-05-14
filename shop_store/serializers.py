@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from .models import Product,Cart,CartItem
 from django.contrib.auth import get_user_model
+from store.models import CustomUser  
+
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -67,9 +70,7 @@ class SimpleCartSerializer(serializers.ModelSerializer):
         return sum(item.quantity for item in cart.items.all())  
     
 
-# from rest_framework import serializers
-# from .models import CartItem
-# from .serializers import ProductSerializer  # Make sure you import your ProductSerializer correctly
+
 
 class NewCartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
@@ -99,3 +100,40 @@ class UserSerializer(serializers.ModelSerializer):
         cartitems = CartItem.objects.filter(cart__user=user, cart__paid=True)[:10]
         serializer = NewCartItemSerializer(cartitems, many=True)
         return serializer.data
+    
+
+
+
+User = get_user_model()
+
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password','address','phone')  
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+            address=validated_data['address'],
+            phone=validated_data['phone'],
+
+
+
+        )
+        return user
+
+
+
+
+
+
+
+   
+
+
+

@@ -77,6 +77,9 @@ CORS_ALLOWED_ORIGINS = [
 "http://localhost:5173",
 "http://localhost:5174",
 "http://localhost:5175",
+"http://192.168.1.10:5173",       
+"http://192.168.1.10:5174",
+"http://192.168.1.10:5175",
 "https://shopapp-u0f6.onrender.com"
 ]
 
